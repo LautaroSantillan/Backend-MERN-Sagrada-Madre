@@ -1,8 +1,9 @@
+// IMPORTS
 import express from "express";
 import morgan from "morgan";
 import authRoutes from './routes/auth.routes.js';
 import cookieParser from "cookie-parser";
-import reminderRoutes from "./routes/reminders.routes.js"
+// import reminderRoutes from "./routes/reminders.routes.js"
 
 // MIDDLEWARES
 const app = express();
@@ -12,6 +13,6 @@ app.use(cookieParser());
 
 // ROUTES
 app.use("/api", authRoutes); 
-app.use("/api", reminderRoutes);
+// app.use("/api", reminderRoutes);
 
 export default app;

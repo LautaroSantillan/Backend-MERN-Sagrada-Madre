@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 
 function LoginPage(){
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signin, errors: SigninErrors } = useAuth();
+    const { signin, errors: signinErrors } = useAuth();
 
-    const onSubmit = handleSubmit(data => {
+    const onSubmit =  handleSubmit((data) => {
         signin(data);
     });
 
@@ -14,11 +14,11 @@ function LoginPage(){
         <div className="flex h-[calc(100vh-100px)] items-center justify-center">
             <div className="bg-orange-200 max-w-md w-full p-10 rounded-md">
                 {
-                    SigninErrors.map((error, i) => {
-                        <div className="bg-red-500 p-2 text-white text-center my-2" key={i}>
+                    signinErrors.map((error, i) => (
+                        <div className="bg-red-500 p-2 text-black text-center my-2" key={i}>
                             {error}
                         </div>
-                    })
+                    ))
                 }
                 <h1 className="text-2xl font-bold text-black">LOGIN</h1>
                 <form onSubmit={onSubmit}>
@@ -38,9 +38,8 @@ function LoginPage(){
                     )}
                     <button type="submit">Login </button>
                 </form>
-
                 <p className="flex gap-x-2 justify-between">
-                    Don't have an account? <Link to="/register" className="text-sky-500">Sing Up</Link>
+                    Don't have an account? <Link to="/register" className="text-sky-500">Sign Up</Link>
                 </p>
             </div>
         </div>

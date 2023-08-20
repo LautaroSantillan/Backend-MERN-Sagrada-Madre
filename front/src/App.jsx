@@ -1,20 +1,31 @@
+// IMPORTS
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
+import ProtectedRoute from "./ProtectedRoute";
+// IMPORTS PAGES
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import RemindersPage from "./pages/RemindersPage";
+import RemindersFormPage from "./pages/RemindersFormPage";
+import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
 
 function App(){
   return(
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>HOME PAGE</h1>}/>
+          {/* Publics Routes */}
+          <Route path="/" element={<HomePage />}/>
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/register" element={<RegisterPage />}/>
-          <Route path="/reminders" element={<h1>REMINDERS PAGE</h1>}/>
-          <Route path="/add-reminders" element={<h1>New Reminders</h1>}/>
-          <Route path="/reminders/:id" element={<h1>Update Reminder</h1>}/>
-          <Route path="/profile" element={<h1>PROFILE</h1>}/>
+          {/* Private Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/reminders" element={<RemindersPage />}/>
+            <Route path="/add-reminders" element={<RemindersFormPage />}/>
+            <Route path="/reminders/:id" element={<RemindersFormPage />}/>
+            <Route path="/profile" element={<ProfilePage />}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./ProtectedRoute";
+import { ReminderProvider } from "./context/RemindersContext";
 // IMPORTS PAGES
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
@@ -13,21 +14,23 @@ import HomePage from "./pages/HomePage";
 function App(){
   return(
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Publics Routes */}
-          <Route path="/" element={<HomePage />}/>
-          <Route path="/login" element={<LoginPage />}/>
-          <Route path="/register" element={<RegisterPage />}/>
-          {/* Private Routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/reminders" element={<RemindersPage />}/>
-            <Route path="/add-reminders" element={<RemindersFormPage />}/>
-            <Route path="/reminders/:id" element={<RemindersFormPage />}/>
-            <Route path="/profile" element={<ProfilePage />}/>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <ReminderProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Publics Routes */}
+            <Route path="/" element={<HomePage />}/>
+            <Route path="/login" element={<LoginPage />}/>
+            <Route path="/register" element={<RegisterPage />}/>
+            {/* Private Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/reminders" element={<RemindersPage />}/>
+              <Route path="/add-reminders" element={<RemindersFormPage />}/>
+              <Route path="/reminders/:id" element={<RemindersFormPage />}/>
+              <Route path="/profile" element={<ProfilePage />}/>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ReminderProvider>
     </AuthProvider>
   );
 }

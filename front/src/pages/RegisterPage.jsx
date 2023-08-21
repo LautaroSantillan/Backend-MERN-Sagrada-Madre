@@ -8,13 +8,13 @@ function RegisterPage(){
     const { signup, isAuthenticated, errors: registerErrors } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if(isAuthenticated) navigate("/reminders")
-    }, [isAuthenticated])
-
     const onSubmit = handleSubmit(async (values) =>{
         signup(values);
     });
+
+    useEffect(() => {
+        if(isAuthenticated) navigate("/reminders");
+    }, [isAuthenticated])
 
     return(
         <div className="bg-orange-200 max-w-md p-10 rounded-md text-black">

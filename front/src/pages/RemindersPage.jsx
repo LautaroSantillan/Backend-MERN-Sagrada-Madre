@@ -1,12 +1,23 @@
-import { useAuth } from "../context/authContext";
+import { useReminders } from "../context/RemindersContext";
+import { useEffect } from "react";
 
 function RemindersPage(){
-    const {user} = useAuth();
-    console.log(user);
+    const { getReminders, reminders } = useReminders();
+
+    useEffect(() => {
+        getReminders();
+    }, [])
+
+    if(reminders.length === 0) return (<h1>There are not reminders</h1>);
 
     return(
         <div>
-            RemindersPage
+            {reminders.map(reminder => (
+                <div key={reminder._id}>
+                    <h1>{reminder.title}</h1>
+                    <p>{reminder.description}</p>
+                </div>
+            ))}
         </div>
     )
 }

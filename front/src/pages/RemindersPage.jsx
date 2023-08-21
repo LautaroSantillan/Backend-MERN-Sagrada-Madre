@@ -11,7 +11,7 @@ function RemindersPage(){
     if(reminders.length === 0) return (<h1>There are not reminders</h1>);
 
     return(
-        <div>
+        <div className="flex h-[calc(100vh-100px)] items-center">
             {reminders.map(reminder => (
                 <div key={reminder._id}>
                     <h1>{reminder.title}</h1>

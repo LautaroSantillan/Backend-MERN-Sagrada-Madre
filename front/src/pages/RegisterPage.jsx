@@ -17,41 +17,44 @@ function RegisterPage(){
     }, [isAuthenticated])
 
     return(
-        <div className="bg-orange-200 max-w-md p-10 rounded-md text-black">
-            {
-                registerErrors.map((error, i) => (
-                    <div className="bg-red-500 p-2 text-black" key={i}>
-                        {error}
-                    </div>
-                ))
-            }
-            <form onSubmit={onSubmit}>
-                <input type="text" {...register("username", { required: true })} 
-                className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
-                placeholder="Username"
-                />
-                {errors.username && (
-                    <p className="text-red-500">Username is required</p>
-                )}
-                <input type="email" {...register("email", { required: true })} 
-                className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
-                placeholder="Email"
-                />
-                {errors.email && (
-                    <p className="text-red-500">Email is required</p>
-                )}
-                <input type="password" {...register("password", { required: true })} 
-                className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
-                placeholder="Password"
-                />
-                {errors.password && (
-                    <p className="text-red-500">Password is required</p>
-                )}
-                <button type="submit">Register</button>
-            </form>
-            <p className="flex gap-x-2 justify-between">
-                Already have an account? <Link to="/login" className="text-sky-500">Login</Link>
-            </p>
+        <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+            <div className="bg-orange-200 max-w-md p-10 rounded-md text-black">
+                {
+                    registerErrors.map((error, i) => (
+                        <div className="bg-red-500 p-2 text-black" key={i}>
+                            {error}
+                        </div>
+                    ))
+                }
+                <h1 className="text-2xl font-bold text-black">REGISTER</h1>
+                <form onSubmit={onSubmit}>
+                    <input type="text" {...register("username", { required: true })} 
+                    className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
+                    placeholder="Username"
+                    />
+                    {errors.username && (
+                        <p className="text-red-500">Username is required</p>
+                    )}
+                    <input type="email" {...register("email", { required: true })} 
+                    className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
+                    placeholder="Email"
+                    />
+                    {errors.email && (
+                        <p className="text-red-500">Email is required</p>
+                    )}
+                    <input type="password" {...register("password", { required: true })} 
+                    className="w-full bg-orange-100 text-black px-4 py-2 my-2 rounded-md"
+                    placeholder="Password"
+                    />
+                    {errors.password && (
+                        <p className="text-red-500">Password is required</p>
+                    )}
+                    <button type="submit">Register</button>
+                </form>
+                <p className="flex gap-x-2 justify-between">
+                    Already have an account? <Link to="/login" className="text-sky-500">Login</Link>
+                </p>
+            </div>
         </div>
     );
 }

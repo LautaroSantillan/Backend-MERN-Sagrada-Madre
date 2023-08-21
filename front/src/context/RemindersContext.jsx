@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createReminderRequest, getRemindersRequest } from "../api/reminders";
+import { createReminderRequest, getRemindersRequest, deleteReminderRequest } from "../api/reminders";
 
 const ReminderContext = createContext();
 
@@ -29,12 +29,22 @@ export function ReminderProvider({ children }){
         }
     }
 
+    const deleteReminder = async (id) => {
+        try {
+            const res = await deleteReminderRequest(id);
+            if(res.status === 204) setReminders(reminders.filter(reminder => reminder._id != id))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return(
         <ReminderContext.Provider 
             value={{
                 reminders,
                 createReminder,
                 getReminders,
+                deleteReminder,
             }}
         >
             {children}

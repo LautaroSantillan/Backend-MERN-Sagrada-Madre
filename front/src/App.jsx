@@ -18,7 +18,8 @@ function App(){
     <AuthProvider>
       <ReminderProvider>
         <BrowserRouter>
-          <Navbar />
+          <main className="container mx-auto">
+            <Navbar />
             <Routes>
               {/* Publics Routes */}
               <Route path="/" element={<HomePage />}/>
@@ -32,6 +33,7 @@ function App(){
                 <Route path="/profile" element={<ProfilePage />}/>
               </Route>
             </Routes>
+          </main>
         </BrowserRouter>
       </ReminderProvider>
     </AuthProvider>

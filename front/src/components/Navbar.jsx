@@ -21,7 +21,7 @@ const Navbar = () => {
                                 Bienvenido {user.username}
                             </li>
                             <li>
-                                <Link to="/add-reminders" className="Li">RECORDATORIOS</Link>
+                                <Link to="/add-reminders" className="Li">Recordatorios</Link>
                             </li>
                             <li>
                                 <Link to="/" className="Li" onClick={() => {

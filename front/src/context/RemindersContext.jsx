@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createReminderRequest, getRemindersRequest, deleteReminderRequest } from "../api/reminders";
+import { createReminderRequest, getRemindersRequest, deleteReminderRequest, getReminderRequest, updateReminderRequest } from "../api/reminders";
 
 const ReminderContext = createContext();
 
@@ -38,6 +38,23 @@ export function ReminderProvider({ children }){
         }
     }
 
+    const getReminder = async (id) => {
+        try {
+            const res = await getReminderRequest(id);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const updateReminder = async (id, reminder) => {
+        try {
+            await updateReminderRequest(id, reminder);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return(
         <ReminderContext.Provider 
             value={{
@@ -45,6 +62,8 @@ export function ReminderProvider({ children }){
                 createReminder,
                 getReminders,
                 deleteReminder,
+                getReminder,
+                updateReminder,
             }}
         >
             {children}

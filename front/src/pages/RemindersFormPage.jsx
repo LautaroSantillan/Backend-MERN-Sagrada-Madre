@@ -1,15 +1,34 @@
 import { useForm } from "react-hook-form";
 import { useReminders } from "../context/RemindersContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function RemindersFormPage(){
-    const { register, handleSubmit } = useForm();
-    const { createReminder } = useReminders();
+    const { register, handleSubmit, setValue } = useForm();
+    const { createReminder, getReminder, updateReminder } = useReminders();
     const navigate = useNavigate();
+    const params = useParams();
+
+    useEffect(() => {
+        async function loadReminder(){
+            if(params.id){
+                const reminder = await getReminder(params.id);
+                console.log(reminder);
+                setValue('title', reminder.title);
+                setValue('description', reminder.description);
+            }
+        }
+        loadReminder()
+    }, []);
 
     const onSubmit = handleSubmit((data) => {
-        createReminder(data);
-        navigate('/reminders');
+        if(params.id){
+            updateReminder(params.id, data);
+            navigate("/reminders");
+        } else {
+            createReminder(data);
+            navigate("/reminders");
+        }
     })
 
     return(

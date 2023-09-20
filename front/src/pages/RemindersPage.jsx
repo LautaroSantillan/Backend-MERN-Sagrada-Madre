@@ -16,7 +16,7 @@ function RemindersPage(){
     );
 
     return(
-        <div className="grid grid-cols-3 gap-2 my-36">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 my-36">
             {reminders.map((reminder) => (
                 <ReminderCard reminder={reminder} key={reminder._id} />
             ))}

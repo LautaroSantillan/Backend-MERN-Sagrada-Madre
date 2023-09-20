@@ -1,22 +1,30 @@
 import { Link } from "react-router-dom";
-import { useReminders } from "../context/RemindersContext"
+import { useReminders } from "../context/RemindersContext";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 function ReminderCard({ reminder }) {
     const { deleteReminder } = useReminders();
 
     return(
-        <div className="bg-orange-200 max-w-md w-full p-10 rounded-md">
+        <div className="bg-orange-200 max-w-md w-full p-10 rounded-md text-black">
             <header className="flex justify-between">
                 <h1 className="text-2xl font-bold">{reminder.title}</h1>
                 <div className="flex gap-x-2 items-center">
-                    <button onClick={() => {
-                        deleteReminder(reminder._id);
+                    <Link to={`/reminders/${reminder._id}`}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+                        Edit
+                    </Link>
+                    <button 
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+                        onClick={() => {
+                            deleteReminder(reminder._id);
                     }}>Delete</button>
-                    <Link to={`/reminders/${reminder._id}`}>Edit</Link>
                 </div>
             </header>
-            <p className="text-slate-300">{reminder.description}</p>
-            <p>{new Date(reminder.date).toLocaleDateString()}</p>
+            <p className="text-black">{reminder.description}</p>
+            <p>{dayjs(reminder.date).utc().format("DD/MM/YYYY")}</p>
         </div>
     )
 }

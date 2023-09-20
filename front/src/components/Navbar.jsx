@@ -9,19 +9,19 @@ const Navbar = () => {
 
     return (
         <div className="header">
-            <Link to="/" className="logo">
+            <Link to={
+                isAuthenticated ? "/reminders" : "/"
+            } 
+            className="logo">
                 <img src={logo} alt="iconoTienda" className="icono"/>
-                <h1 className="nombre"><span>Sagrada</span>Madre</h1>
+                <h1 className="nombre text-black"><span>Sagrada</span>Madre</h1>
             </Link>
             <nav className="navbar-container flex rounded-lg">
                 <ul className="navbar nav-animaciones flex gap-x-2">
                     {isAuthenticated ? (
                         <>
                             <li>
-                                Bienvenido {user.username}
-                            </li>
-                            <li>
-                                <Link to="/add-reminders" className="Li">Recordatorios</Link>
+                                <Link to="/add-reminders" className="Li">Nuevo Recordatorio</Link>
                             </li>
                             <li>
                                 <Link to="/" className="Li" onClick={() => {
